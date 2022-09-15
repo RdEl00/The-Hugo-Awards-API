@@ -48,5 +48,6 @@ pip install python3 flask
     >http://127.0.0.1:5000/api/v1/resources/books?published=2010
     
 <br>
+
 `To dos`: Building script to srape data from  [Hugo offical website](https://www.thehugoawards.org/) to explore the available data without the BB limitation
 
