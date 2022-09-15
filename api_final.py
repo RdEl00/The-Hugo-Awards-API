@@ -1,9 +1,11 @@
+#Import libraries
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 import sqlite3
 
+#Creates the Flask application object
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = True #Starts the debugger
 
 def dict_factory(cursor, row):
     d = {}
@@ -14,10 +16,9 @@ def dict_factory(cursor, row):
 
 @app.route('/', methods=['GET'])
 def home():
-    return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
+    return render_template('index.html')
 
-
+#Function pulls in data from our Hugo database
 @app.route('/api/v1/resources/books/all', methods=['GET'])
 def api_all():
     conn = sqlite3.connect('books.db')
@@ -28,12 +29,12 @@ def api_all():
     return jsonify(all_books)
 
 
-
+#Function is to create an error page 
 @app.errorhandler(404)
 def page_not_found(e):
     return "<h1>404</h1><p>The resource could not be found.</p>", 404
 
-
+#Filtering function
 @app.route('/api/v1/resources/books', methods=['GET'])
 def api_filter():
     query_parameters = request.args
@@ -59,6 +60,7 @@ def api_filter():
 
     query = query[:-4] + ';'
 
+    #Establishing the connection to the database
     conn = sqlite3.connect('books.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
