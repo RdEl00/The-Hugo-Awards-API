@@ -49,5 +49,5 @@ pip install python3 flask
     
 <br>
 
-`To dos`: Building script to srape data from  [Hugo offical website](https://www.thehugoawards.org/) to explore the available data without the BB limitation
+`To dos`: Building script to srape data from  [Hugo offical website](https://www.thehugoawards.org/) to explore the available data avoiding the DB limitation
 
